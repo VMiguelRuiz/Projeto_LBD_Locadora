@@ -1,0 +1,19 @@
+create table Tipo(
+  idTipo int,
+  nome varchar(25)
+);
+
+select * from tipo;
+
+
+
+create or replace procedure Tipos (id in int, name in varchar)
+AS
+Begin 
+  insert into tipo (idTipo, nome) values (id, name);
+End;
+
+exec Tipos (3, 'Comedia');
+
+
+
