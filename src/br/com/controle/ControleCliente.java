@@ -12,9 +12,9 @@ public class ControleCliente {
 		Cliente cliente = new Cliente();
 		cliente.setIdCliente(id);
 		cliente.setNomeCliente(nome);
-		cliente.setCPFCliente(cpf);
+		cliente.setCpf(cpf);
 		cliente.setEnderecoCliente(endereco);
-		cliente.setTelefoneCliente(telefone);
+		cliente.setTelefone(telefone);
 		dao.adicionarCliente(cliente);
 	}
 	
@@ -30,9 +30,9 @@ public class ControleCliente {
 		Cliente cliente = new Cliente();
 		cliente.setIdCliente(id);
 		cliente.setNomeCliente(nome);
-		cliente.setCPFCliente(cpf);
+		cliente.setCpf(cpf);
 		cliente.setEnderecoCliente(endereco);
-		cliente.setTelefoneCliente(telefone);
+		cliente.setTelefone(telefone);
 		dao.alteraCliente(cliente);
 	}
 	
@@ -42,9 +42,9 @@ public class ControleCliente {
 		for (Cliente cliente : clientes) {
 			System.out.println("ID: " + cliente.getIdCliente());
 			System.out.println("Nome: " + cliente.getNomeCliente());
-			System.out.println("CPF: " + cliente.getCPFCliente());
+			System.out.println("CPF: " + cliente.getCpf());
 			System.out.println("Endereco: " + cliente.getEnderecoCliente());
-			System.out.println("Telefone: " + cliente.getTelefoneCliente());
+			System.out.println("Telefone: " + cliente.getTelefone());
 		}
 	}
 }
