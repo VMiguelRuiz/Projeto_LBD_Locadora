@@ -1,23 +1,23 @@
 package br.com.modelo;
 
 public class Genero {
-	int idGenero;
-	String nomeGenero;
+	private int genero_id;
+	private String genero_nome;
 
 	public int getIdGenero() {
-		return idGenero;
+		return genero_id;
 	}
 
-	public void setIdGenero(int idGenero) {
-		this.idGenero = idGenero;
+	public void setIdGenero(int genero_id) {
+		this.genero_id = genero_id;
 	}
 
 	public String getNomeGenero() {
-		return nomeGenero;
+		return genero_nome;
 	}
 
-	public void setNomeGenero(String nomeGenero) {
-		this.nomeGenero = nomeGenero;
+	public void setNomeGenero(String genero_nome) {
+		this.genero_nome = genero_nome;
 	}
 
 }

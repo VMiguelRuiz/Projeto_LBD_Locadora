@@ -15,7 +15,7 @@ public class LocacaoDao {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareCall("{call}");
+			stmt = connect.prepareCall("{call INSERIRLOCACAO(?,?,?,?)}");
 			stmt.setInt(1, locacao.getIdCliente());
 			stmt.setDouble(2, locacao.getValorLocacao());
 			stmt.setInt(3, locacao.getIdLocacao());
@@ -34,12 +34,12 @@ public class LocacaoDao {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareCall("{call}");
+			stmt = connect.prepareCall("{call EXCLUILOCACAO(?)}");
 			stmt.setInt(1, locacao.getIdCliente());
 			stmt.setDouble(2, locacao.getValorLocacao());
 			stmt.setInt(3, locacao.getIdLocacao());
-			stmt.setDate(4, locacao.getDataLocacao());		
-			
+			stmt.setDate(4, locacao.getDataLocacao());
+
 			stmt.execute();
 			System.out.println("Excluido");
 		} catch (SQLException ex) {
@@ -53,14 +53,12 @@ public class LocacaoDao {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareCall("{call}");
-			stmt = connect.prepareCall("{call}");
+			stmt = connect.prepareCall("{call ALTERARLOCACAO(?,?,?,?)}");
 			stmt.setInt(1, locacao.getIdCliente());
 			stmt.setDouble(2, locacao.getValorLocacao());
 			stmt.setInt(3, locacao.getIdLocacao());
-			stmt.setDate(4, locacao.getDataLocacao());	
-			
-			
+			stmt.setDate(4, locacao.getDataLocacao());
+
 			stmt.execute();
 			System.out.println("Alterado");
 		} catch (SQLException e) {
@@ -79,10 +77,10 @@ public class LocacaoDao {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				Locacao locacao = new Locacao();
-				locacao.setIdLocacao(rs.getInt("IDLOCACAO"));
-				locacao.setDataLocacao(rs.getDate("DATALOCACAO"));
-				locacao.setValorLocacao(rs.getDouble("VALOR"));
-				locacao.setIdCliente(rs.getInt("IDCLIENTE"));
+				locacao.setIdLocacao(rs.getInt("LOCACAO_ID"));
+				locacao.setDataLocacao(rs.getDate("LOCACAO_DATA"));
+				locacao.setValorLocacao(rs.getDouble("LOCACAO_VALOR"));
+				locacao.setIdCliente(rs.getInt("CLIENTE_ID"));
 
 				L.add(locacao);
 			}

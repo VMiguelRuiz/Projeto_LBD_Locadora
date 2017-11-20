@@ -1,32 +1,32 @@
 package br.com.modelo;
 
 public class Filme {
-	private int idFilme;
-	private String tituloFilme;
-	private int idGenero;
+	private int filme_id;
+	private String filme_titulo;
+	private int genero_id;
 
 	public int getIdFilme() {
-		return idFilme;
+		return filme_id;
 	}
 
-	public void setIdFilme(int idFilme) {
-		this.idFilme = idFilme;
+	public void setIdFilme(int filme_id) {
+		this.filme_id = filme_id;
 	}
 
 	public String getTituloFilme() {
-		return tituloFilme;
+		return filme_titulo;
 	}
 
-	public void setTituloFilme(String tituloFilme) {
-		this.tituloFilme = tituloFilme;
+	public void setTituloFilme(String filme_titulo) {
+		this.filme_titulo = filme_titulo;
 	}
 
 	public int getIdGenero() {
-		return idGenero;
+		return genero_id;
 	}
 
-	public void setIdGenero(int idGenero) {
-		this.idGenero = idGenero;
+	public void setIdGenero(int genero_id) {
+		this.genero_id = genero_id;
 	}
 
 }

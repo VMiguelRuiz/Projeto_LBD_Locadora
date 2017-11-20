@@ -66,13 +66,13 @@ public class FormatoDao {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareStatement("select * from FORMATO");
+			stmt = connect.prepareStatement("select * from TB_FORMATO");
 			List<Formato> formatos = new ArrayList<Formato>();
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				Formato formato = new Formato();
-				formato.setIdFormato(rs.getInt("IDFORMATO"));
-				formato.setNomeFormato(rs.getString("NOMEFORMATO"));
+				formato.setIdFormato(rs.getInt("FORMATO_ID"));
+				formato.setNomeFormato(rs.getString("FORMATO_NOME"));
 
 				formatos.add(formato);
 			}

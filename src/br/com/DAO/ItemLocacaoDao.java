@@ -16,7 +16,7 @@ public class ItemLocacaoDao {
 		PreparedStatement stmt = null;
 		try {
 
-			stmt = connect.prepareCall("{call}");
+			stmt = connect.prepareCall("{call INSERIRITEM(?,?,?)}");
 			stmt.setInt(1, item.getIdItem());
 			stmt.setInt(2, item.getIdCopia());
 			stmt.setInt(3, item.getIdLocacao());
@@ -34,7 +34,7 @@ public class ItemLocacaoDao {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareCall("{call}");
+			stmt = connect.prepareCall("{call EXCLUIITEM(?)}");
 			stmt.setInt(1, item.getIdItem());
 			stmt.setInt(2, item.getIdCopia());
 			stmt.setInt(3, item.getIdLocacao());
@@ -53,7 +53,7 @@ public class ItemLocacaoDao {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareCall("{call}");
+			stmt = connect.prepareCall("{call ALTERARITEM(?,?,?)}");
 			stmt.setInt(1, item.getIdItem());
 			stmt.setInt(2, item.getIdCopia());
 			stmt.setInt(3, item.getIdLocacao());
@@ -76,9 +76,9 @@ public class ItemLocacaoDao {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				ItemLocacao item = new ItemLocacao();
-				item.setIdItem(rs.getInt("IDITEM"));
-				item.setIdCopia(rs.getInt("IDCOPIA"));
-				item.setIdLocacao(rs.getInt("IDLOCACAO"));
+				item.setIdItem(rs.getInt("ITEM_ID"));
+				item.setIdCopia(rs.getInt("COPIA_ID"));
+				item.setIdLocacao(rs.getInt("LOCACAO_ID"));
 
 				itens.add(item);
 			}

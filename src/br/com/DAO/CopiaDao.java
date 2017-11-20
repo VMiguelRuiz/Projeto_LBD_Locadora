@@ -15,12 +15,12 @@ public class CopiaDao {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareCall("{call}");
+			stmt = connect.prepareCall("{call INSERIRCOPIA(?,?,?,?,?)}");
 			stmt.setInt(1, copia.getIdCopia());
 			stmt.setInt(2, copia.getIdFilme());
-			stmt.setString(3, copia.getLocado());
+			stmt.setString(3, copia.getCopiaLocada());
 			stmt.setInt(4, copia.getIdFormato());
-
+			stmt.setDouble(5, copia.getValorCopia());
 			stmt.execute();
 			System.out.println("Adicionado");
 		} catch (SQLException e) {
@@ -34,10 +34,10 @@ public class CopiaDao {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareCall("{call }");
+			stmt = connect.prepareCall("{call EXCLUICOPIA(?)}");
 			stmt.setInt(1, copia.getIdCopia());
 			stmt.setInt(2, copia.getIdFilme());
-			stmt.setString(3, copia.getLocado());
+			stmt.setString(3, copia.getCopiaLocada());
 			stmt.setInt(4, copia.getIdFormato());
 
 			stmt.execute();
@@ -53,12 +53,12 @@ public class CopiaDao {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareCall("{call}");
+			stmt = connect.prepareCall("{call ALTERARCOPIA(?,?,?,?,?)}");
 			stmt.setInt(1, copia.getIdCopia());
 			stmt.setInt(2, copia.getIdFilme());
-			stmt.setString(3, copia.getLocado());
+			stmt.setString(3, copia.getCopiaLocada());
 			stmt.setInt(4, copia.getIdFormato());
-
+			stmt.setDouble(5, copia.getValorCopia());
 			stmt.execute();
 			System.out.println("Alterado");
 		} catch (SQLException e) {
@@ -77,11 +77,11 @@ public class CopiaDao {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				Copia copia = new Copia();
-				copia.setIdCopia(rs.getInt("IDCOPIA"));
-				copia.setIdFilme(rs.getInt("IDFILME"));
-				copia.setLocado(rs.getString("LOCADO"));
-				copia.setIdFormato(rs.getInt("IDFORMATO"));
-				
+				copia.setIdCopia(rs.getInt("COPIA_ID"));
+				copia.setIdFilme(rs.getInt("FILME_ID"));
+				copia.setCopiaLocada(rs.getString("COPIA_LOCADA"));
+				copia.setIdFormato(rs.getInt("FORMATO_ID"));
+				copia.setIdFormato(rs.getInt("COPIA_VALOR"));
 				copias.add(copia);
 			}
 			stmt.execute();

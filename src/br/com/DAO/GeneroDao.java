@@ -15,7 +15,7 @@ public class GeneroDao {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareCall("{call}");
+			stmt = connect.prepareCall("{call INSERIRGENERO(?,?)}");
 			stmt.setInt(1, genero.getIdGenero());
 			stmt.setString(2, genero.getNomeGenero());
 
@@ -32,7 +32,7 @@ public class GeneroDao {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareCall("{call}");
+			stmt = connect.prepareCall("{call EXCLUIGENERO(?)}");
 			stmt.setInt(1, genero.getIdGenero());
 			stmt.setString(2, genero.getNomeGenero());
 
@@ -50,7 +50,7 @@ public class GeneroDao {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareCall("{call}");
+			stmt = connect.prepareCall("{call ALTERARGENERO(?,?)}");
 			stmt.setInt(1, genero.getIdGenero());
 			stmt.setString(2, genero.getNomeGenero());
 
@@ -73,8 +73,8 @@ public class GeneroDao {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				Genero genero = new Genero();
-				genero.setIdGenero(rs.getInt("IDGENERO"));
-				genero.setNomeGenero(rs.getString("NOMEGENERO"));
+				genero.setIdGenero(rs.getInt("GENERO_ID"));
+				genero.setNomeGenero(rs.getString("GENERO_NOME"));
 
 				generos.add(genero);
 			}

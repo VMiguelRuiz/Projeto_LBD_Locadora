@@ -16,12 +16,12 @@ public class ClienteDao {
 		PreparedStatement stmt = null;
 		try {
 			
-			stmt = connect.prepareCall("{call}");
+			stmt = connect.prepareCall("{call INSERIRCLIENTE(?,?,?,?,?)}");
 			stmt.setInt(1, cliente.getIdCliente());
-			stmt.setLong(2, cliente.getCpf());
+			stmt.setLong(2, cliente.getCPFCliente());
 			stmt.setString(3, cliente.getNomeCliente());
 			stmt.setString(4, cliente.getEnderecoCliente());
-			stmt.setInt(5, cliente.getTelefone());
+			stmt.setInt(5, cliente.getTelefoneCliente());
 
 			stmt.executeUpdate();
 			System.out.println("Adicionado");
@@ -39,12 +39,12 @@ public class ClienteDao {
 		PreparedStatement stmt = null;
 		try {
 			
-			stmt = connect.prepareCall("{call}");
+			stmt = connect.prepareCall("{call EXCLUICLIENTE(?)}");
 			stmt.setInt(1, cliente.getIdCliente());
-			stmt.setLong(2, cliente.getCpf());
+			stmt.setLong(2, cliente.getCPFCliente());
 			stmt.setString(3, cliente.getNomeCliente());
 			stmt.setString(4, cliente.getEnderecoCliente());
-			stmt.setInt(5, cliente.getTelefone());
+			stmt.setInt(5, cliente.getTelefoneCliente());
 
 			stmt.execute();
 			System.out.println("Excluido");
@@ -59,12 +59,12 @@ public class ClienteDao {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try{
-			stmt = connect.prepareCall("{call}");
+			stmt = connect.prepareCall("{call INSERIRCLIENTE(?,?,?,?,?)}");
 			stmt.setInt(1, cliente.getIdCliente());
-			stmt.setLong(2, cliente.getCpf());
+			stmt.setLong(2, cliente.getCPFCliente());
 			stmt.setString(3, cliente.getNomeCliente());
 			stmt.setString(4, cliente.getEnderecoCliente());
-			stmt.setInt(5, cliente.getTelefone());
+			stmt.setInt(5, cliente.getTelefoneCliente());
 			
 			System.out.println("Alterado");
 			 stmt.execute();
@@ -83,11 +83,11 @@ public class ClienteDao {
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 				Cliente cliente = new Cliente();
-				cliente.setIdCliente(rs.getInt("IDCLIENTE"));
-				cliente.setCpf(rs.getLong("CPF"));
-				cliente.setNomeCliente(rs.getString("NOMECLIENTE"));
-				cliente.setEnderecoCliente(rs.getString("endereco"));
-				cliente.setTelefone(rs.getInt("telefone"));
+				cliente.setIdCliente(rs.getInt("CLIENTE_ID"));
+				cliente.setNomeCliente(rs.getString("CLIENTE_NOME"));
+				cliente.setCPFCliente(rs.getLong("CLIENTE_CPF"));
+				cliente.setEnderecoCliente(rs.getString("CLIENTE_ENDERECO"));
+				cliente.setTelefoneCliente(rs.getInt("CLIENTE_TELEFONE"));
 				
 				clientes.add(cliente);
 			}
@@ -101,4 +101,30 @@ public class ClienteDao {
 		}
 	}
 
+	public List<Cliente> pesquisaCliente(String nome){
+		Connection connect = ConnectionFactory.getConnection();
+		PreparedStatement stmt = null;
+		try{
+			stmt = connect.prepareStatement("select * from TB_Cliente where CLIENTE_NOME like '%"+nome+"%'");
+			List<Cliente> clientes = new ArrayList<Cliente>();
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()){
+				Cliente cliente = new Cliente();
+				cliente.setIdCliente(rs.getInt("CLIENTE_ID"));
+				cliente.setCPFCliente(rs.getLong("CLIENTE_CPF"));
+				cliente.setNomeCliente(rs.getString("CLIENTE_NOME"));
+				cliente.setEnderecoCliente(rs.getString("CLIENTE_ENDERECO"));
+				cliente.setTelefoneCliente(rs.getInt("CLIENTE_TELEFONE"));
+				
+				clientes.add(cliente);
+			}
+			stmt.execute();
+			rs.close();
+			return clientes;
+		} catch (SQLException e) {
+			 throw new RuntimeException(e);
+		} finally {
+			ConnectionFactory.closeConnection(connect, stmt);
+		}
+	}
 }

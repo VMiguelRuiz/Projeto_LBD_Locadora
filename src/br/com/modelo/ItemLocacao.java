@@ -1,32 +1,32 @@
 package br.com.modelo;
 
 public class ItemLocacao {
-	private int idItem;
-	private int idCopia;
-	private int idLocacao;
+	private int item_id;
+	private int copia_id;
+	private int locacao_id;
 
 	public int getIdItem() {
-		return idItem;
+		return item_id;
 	}
 
-	public void setIdItem(int idItem) {
-		this.idItem = idItem;
+	public void setIdItem(int item_id) {
+		this.item_id = item_id;
 	}
 
 	public int getIdCopia() {
-		return idCopia;
+		return copia_id;
 	}
 
-	public void setIdCopia(int idCopia) {
-		this.idCopia = idCopia;
+	public void setIdCopia(int copia_id) {
+		this.copia_id = copia_id;
 	}
 
 	public int getIdLocacao() {
-		return idLocacao;
+		return locacao_id;
 	}
 
-	public void setIdLocacao(int idLocacao) {
-		this.idLocacao = idLocacao;
+	public void setIdLocacao(int locacao_id) {
+		this.locacao_id = locacao_id;
 	}
 
 }
