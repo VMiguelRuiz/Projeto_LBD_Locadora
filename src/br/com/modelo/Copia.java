@@ -1,11 +1,20 @@
 package br.com.modelo;
 
 public class Copia {
+	private String copia_nome;
 	private int copia_id;
 	private int filme_id;
 	private String copia_locada;
 	private int formato_id;
 	private double copia_valor;
+
+	public String getNomeCopia() {
+		return copia_nome;
+	}
+
+	public void setNomeCopia(String copia_nome) {
+		this.copia_nome = copia_nome;
+	}
 
 	public int getIdCopia() {
 		return copia_id;
@@ -46,7 +55,5 @@ public class Copia {
 	public void setValorCopia(double copia_valor) {
 		this.copia_valor = copia_valor;
 	}
-	
-	
 
 }

@@ -71,7 +71,7 @@ public class FilmeDao {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareStatement("select * from FILME");
+			stmt = connect.prepareStatement("select * from TB_FILME");
 			List<Filme> filmes = new ArrayList<Filme>();
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -92,7 +92,29 @@ public class FilmeDao {
 		}
 	}
 
-	public List<Filme> pesquisaFilme(String nome) {
+	public List<Filme> listaFilme(int filme_id) {
+		Connection connect = ConnectionFactory.getConnection();
+		PreparedStatement stmt = null;
+		try {
+			stmt = connect.prepareStatement("select * from FILME where filme_id = " + filme_id);
+			List<Filme> filmes = new ArrayList<Filme>();
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Filme filme = new Filme();
+				filme.setTituloFilme(rs.getString("FILME_TITULO"));
+				filmes.add(filme);
+			}
+			stmt.execute();
+			rs.close();
+			return filmes;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			ConnectionFactory.closeConnection(connect, stmt);
+		}
+	}
+
+	public List<Filme> listaFilme(String nome) {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {

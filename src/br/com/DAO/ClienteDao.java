@@ -127,4 +127,5 @@ public class ClienteDao {
 			ConnectionFactory.closeConnection(connect, stmt);
 		}
 	}
+
 }

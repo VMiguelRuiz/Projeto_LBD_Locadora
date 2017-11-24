@@ -81,7 +81,7 @@ public class CopiaDao {
 				copia.setIdFilme(rs.getInt("FILME_ID"));
 				copia.setCopiaLocada(rs.getString("COPIA_LOCADA"));
 				copia.setIdFormato(rs.getInt("FORMATO_ID"));
-				copia.setIdFormato(rs.getInt("COPIA_VALOR"));
+				copia.setValorCopia(rs.getInt("COPIA_VALOR"));
 				copias.add(copia);
 			}
 			stmt.execute();

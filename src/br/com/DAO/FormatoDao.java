@@ -85,4 +85,28 @@ public class FormatoDao {
 			ConnectionFactory.closeConnection(connect, stmt);
 		}
 	}
+	
+	public List<Formato> listaFormatos(int formato_id) {
+		Connection connect = ConnectionFactory.getConnection();
+		PreparedStatement stmt = null;
+		try {
+			stmt = connect.prepareStatement("select * from TB_FORMATO where formato_id = " + formato_id + "");
+			List<Formato> formatos = new ArrayList<Formato>();
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Formato formato = new Formato();
+				formato.setIdFormato(rs.getInt("FORMATO_ID"));
+				formato.setNomeFormato(rs.getString("FORMATO_NOME"));
+
+				formatos.add(formato);
+			}
+			stmt.execute();
+			rs.close();
+			return formatos;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			ConnectionFactory.closeConnection(connect, stmt);
+		}
+	}
 }

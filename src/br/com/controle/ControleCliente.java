@@ -7,32 +7,32 @@ import br.com.modelo.Cliente;
 
 public class ControleCliente {
 
-	public void adicionaCliente(int id, String nome, long cpf, int telefone, String endereco) {
+	public void adicionaCliente(int cliente_id, String cliente_nome, long cliente_cpf, int cliente_telefone, String cliente_endereco) {
 		ClienteDao dao = new ClienteDao();
 		Cliente cliente = new Cliente();
-		cliente.setIdCliente(id);
-		cliente.setNomeCliente(nome);
-		cliente.setCpf(cpf);
-		cliente.setEnderecoCliente(endereco);
-		cliente.setTelefone(telefone);
+		cliente.setIdCliente(cliente_id);
+		cliente.setNomeCliente(cliente_nome);
+		cliente.setCPFCliente(cliente_cpf);
+		cliente.setEnderecoCliente(cliente_endereco);
+		cliente.setTelefoneCliente(cliente_telefone);
 		dao.adicionarCliente(cliente);
 	}
 	
-	public void excluiCliente(int id) {
+	public void excluiCliente(int cliente_id) {
 		ClienteDao dao = new ClienteDao();
 		Cliente cliente = new Cliente();
-		cliente.setIdCliente(id);
+		cliente.setIdCliente(cliente_id);
 		dao.excluiCliente(cliente);
 	}
 	
-	public void alteraCliente(int id, String nome, long cpf, int telefone, String endereco) {
+	public void alteraCliente(int cliente_id, String cliente_nome, long cliente_cpf, int cliente_telefone, String cliente_endereco) {
 		ClienteDao dao = new ClienteDao();
 		Cliente cliente = new Cliente();
-		cliente.setIdCliente(id);
-		cliente.setNomeCliente(nome);
-		cliente.setCpf(cpf);
-		cliente.setEnderecoCliente(endereco);
-		cliente.setTelefone(telefone);
+		cliente.setIdCliente(cliente_id);
+		cliente.setNomeCliente(cliente_nome);
+		cliente.setCPFCliente(cliente_cpf);
+		cliente.setEnderecoCliente(cliente_endereco);
+		cliente.setTelefoneCliente(cliente_telefone);
 		dao.alteraCliente(cliente);
 	}
 	
@@ -42,9 +42,9 @@ public class ControleCliente {
 		for (Cliente cliente : clientes) {
 			System.out.println("ID: " + cliente.getIdCliente());
 			System.out.println("Nome: " + cliente.getNomeCliente());
-			System.out.println("CPF: " + cliente.getCpf());
+			System.out.println("CPF: " + cliente.getCPFCliente());
 			System.out.println("Endereco: " + cliente.getEnderecoCliente());
-			System.out.println("Telefone: " + cliente.getTelefone());
+			System.out.println("Telefone: " + cliente.getTelefoneCliente());
 		}
 	}
 }

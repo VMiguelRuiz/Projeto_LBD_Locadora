@@ -87,4 +87,27 @@ public class GeneroDao {
 			ConnectionFactory.closeConnection(connect, stmt);
 		}
 	}
+	
+	public List<Genero> listaGenero(int genero_id) {
+		Connection connect = ConnectionFactory.getConnection();
+		PreparedStatement stmt = null;
+		try {
+			stmt = connect.prepareStatement("select * from TB_GENERO where genero_id = "+ genero_id);
+			List<Genero> generos = new ArrayList<Genero>();
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Genero genero = new Genero();
+				genero.setNomeGenero(rs.getString("GENERO_NOME"));
+
+				generos.add(genero);
+			}
+			stmt.execute();
+			rs.close();
+			return generos;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			ConnectionFactory.closeConnection(connect, stmt);
+		}
+	}
 }

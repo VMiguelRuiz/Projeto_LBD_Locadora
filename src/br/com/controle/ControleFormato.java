@@ -7,30 +7,30 @@ import br.com.modelo.Formato;
 
 public class ControleFormato {
 
-	public void adicionaFormato(int idFormato, String nome) {
+	public void adicionaFormato(int formato_id, String formato_nome) {
 		Formato formato = new Formato();
 		FormatoDao dao = new FormatoDao();
-		formato.setIdFormato(idFormato);
-		formato.setNomeFormato(nome);
+		formato.setIdFormato(formato_id);
+		formato.setNomeFormato(formato_nome);
 		dao.adicionaFormato(formato);
 	}
 
-	public void excluiFormato(int idFormato) {
+	public void excluiFormato(int formato_id) {
 		Formato formato = new Formato();
 		FormatoDao dao = new FormatoDao();
-		formato.setIdFormato(idFormato);
+		formato.setIdFormato(formato_id);
 		dao.excluiFormato(formato);
 	}
 
-	public void alteraFormato(int idFormato, String nome) {
+	public void alteraFormato(int formato_id, String formato_nome) {
 		Formato formato = new Formato();
 		FormatoDao dao = new FormatoDao();
-		formato.setIdFormato(idFormato);
-		formato.setNomeFormato(nome);
+		formato.setIdFormato(formato_id);
+		formato.setNomeFormato(formato_nome);
 		dao.alteraFormato(formato);
 	}
-	
-	public void listaFormato(){
+
+	public void listaFormato() {
 
 		FormatoDao dao = new FormatoDao();
 		List<Formato> formatos = dao.listaFormatos();
@@ -39,4 +39,17 @@ public class ControleFormato {
 			System.out.println("Formato: " + formato.getNomeFormato());
 		}
 	}
+	
+	public String listaFormato(int formato_id) {
+		String nome = "";
+		FormatoDao dao = new FormatoDao();
+		List<Formato> formatos = dao.listaFormatos(formato_id);
+		for (Formato formato : formatos) {
+			//System.out.println("ID: " + formato.getIdFormato());
+			//System.out.println("Formato: " + formato.getNomeFormato());
+			nome = formato.getNomeFormato();
+		}
+		return nome;
+	}
+	
 }
