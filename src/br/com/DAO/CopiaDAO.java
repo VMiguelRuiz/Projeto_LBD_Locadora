@@ -43,7 +43,7 @@ public class CopiaDAO {
 			System.out.println("Excluido");
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
-		} finally {
+		} finally { 
 			ConnectionFactory.closeConnection(connect, stmt);
 		}
 	}
