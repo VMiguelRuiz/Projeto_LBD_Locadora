@@ -2,53 +2,60 @@ package br.com.controle;
 
 import java.util.List;
 
-import br.com.DAO.FilmeDao;
-import br.com.DAO.FormatoDao;
+import br.com.DAO.FilmeDAO;
+import br.com.DAO.FormatoDAO;
 import br.com.modelo.Filme;
-
 
 public class ControleFilme {
 
-	public void adicionaFormato(int filme_id, String filme_titulo, int genero_id) {
+	public void adicionaFilme(String filmeID, String filme_titulo, String generoID) {
+		int filme_id = Integer.parseInt(filmeID);
+		int genero_id = Integer.parseInt(generoID);
+
 		Filme filme = new Filme();
-		FilmeDao dao = new FilmeDao();
-		
+		FilmeDAO filme_dao = new FilmeDAO();
+
 		filme.setIdFilme(filme_id);
 		filme.setIdGenero(genero_id);
 		filme.setTituloFilme(filme_titulo);
-		dao.adicionaFilme(filme);
+		filme_dao.adicionaFilme(filme);
 	}
 
-	public void excluiFormato(int formato_id) {
+	public void excluiFilme(String formato_id) {
 		Filme filme = new Filme();
-		FilmeDao dao = new FilmeDao();
-		filme.setIdFilme(formato_id);
-		dao.excluiFilme(filme);
+		FilmeDAO filme_dao = new FilmeDAO();
+		filme.setIdFilme(Integer.parseInt(formato_id));
+		filme_dao.excluiFilme(filme);
 	}
 
-	public void alteraFormato(int filme_id, String filme_titulo) {
+	public void alteraFilme(String filmeID, String filme_titulo, String generoID) {
+		int filme_id = Integer.parseInt(filmeID);
+		int genero_id = Integer.parseInt(generoID);
+
 		Filme filme = new Filme();
-		FilmeDao dao = new FilmeDao();
+		FilmeDAO filme_dao = new FilmeDAO();
+
 		filme.setIdFilme(filme_id);
+		filme.setIdGenero(genero_id);
 		filme.setTituloFilme(filme_titulo);
-		dao.alteraFilme(filme);
+		filme_dao.alteraFilme(filme);
 	}
 
 	public void listaFilme() {
 		ControleFormato formato = new ControleFormato();
-		FilmeDao dao = new FilmeDao();
-		List<Filme> filmes = dao.listaFilme();
+		FilmeDAO filme_dao = new FilmeDAO();
+		List<Filme> filmes = filme_dao.listaFilme();
 		for (Filme filme : filmes) {
 			System.out.println("ID: " + filme.getIdFilme());
 			System.out.println("Titulo: " + filme.getTituloFilme());
 			System.out.println("Formato: " + formato.listaFormato(filme.getIdFilme()));
 		}
 	}
-	
+
 	public String listaFilme(int filme_id) {
 		String titulo = "";
 		ControleFormato formato = new ControleFormato();
-		FilmeDao dao = new FilmeDao();
+		FilmeDAO dao = new FilmeDAO();
 		List<Filme> filmes = dao.listaFilme();
 		for (Filme filme : filmes) {
 			titulo = filme.getTituloFilme();

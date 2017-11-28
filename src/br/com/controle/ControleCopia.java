@@ -2,52 +2,67 @@ package br.com.controle;
 
 import java.util.List;
 
-import br.com.DAO.CopiaDao;
-import br.com.DAO.FilmeDao;
-import br.com.DAO.FormatoDao;
+import br.com.DAO.CopiaDAO;
+import br.com.DAO.FilmeDAO;
+import br.com.DAO.FormatoDAO;
 import br.com.modelo.Copia;
 
 public class ControleCopia {
 
-	public void adicionaCopia(int copia_id, int filme_id, String copia_locada, int formato_id) {
+	public void adicionaCopia(String copiaID, String filmeID,
+			String copiaLocada, String formatoID) {
 
+		int copia_id = Integer.parseInt(copiaID);
+		int filme_id = Integer.parseInt(filmeID);
+		int formato_id = Integer.parseInt(formatoID);
+		int copia_locada = Integer.parseInt(copiaLocada);
+		
 		Copia copia = new Copia();
-		CopiaDao dao = new CopiaDao();
+		CopiaDAO copia_dao = new CopiaDAO();
 		copia.setIdFormato(copia_id);
 		copia.setIdFilme(filme_id);
 		copia.setCopiaLocada(copia_locada);
 		copia.setIdFormato(formato_id);
-		dao.adicionaCopia(copia);
+		copia_dao.adicionaCopia(copia);
 	}
 
-	public void excluiCopia(int copia_id) {
+	public void excluiCopia(String copia_id) {
 		Copia copia = new Copia();
-		CopiaDao dao = new CopiaDao();
-		copia.setIdCopia(copia_id);
-		dao.excluiCopia(copia);
+		CopiaDAO copia_dao = new CopiaDAO();
+		copia.setIdCopia(Integer.parseInt(copia_id));
+		copia_dao.excluiCopia(copia);
 	}
 
-	public void alteraCopia(int copia_id, int filme_id, String copia_locada, int formato_id) {
+	public void alteraCopia(String copiaID, String filmeID,
+			String copiaLocada, String formatoID) {
+
+		int copia_id = Integer.parseInt(copiaID);
+		int filme_id = Integer.parseInt(filmeID);
+		int formato_id = Integer.parseInt(formatoID);
+		int copia_locada = Integer.parseInt(copiaLocada);
+		
 		Copia copia = new Copia();
-		CopiaDao dao = new CopiaDao();
+		CopiaDAO copia_dao = new CopiaDAO();
 		copia.setIdFormato(copia_id);
 		copia.setIdFilme(filme_id);
 		copia.setCopiaLocada(copia_locada);
 		copia.setIdFormato(formato_id);
-		dao.alteraCopia(copia);
+		copia_dao.alteraCopia(copia);
 	}
 
 	public void listaCopia() {
 
-		CopiaDao dao = new CopiaDao();
-		ControleFilme filme = new ControleFilme ();
+		CopiaDAO copia_dao = new CopiaDAO();
+		ControleFilme filme = new ControleFilme();
 		ControleFormato formato = new ControleFormato();
-		List<Copia> copias = dao.listaCopia();
+		List<Copia> copias = copia_dao.listaCopia();
 		for (Copia copia : copias) {
 			System.out.println("ID: " + copia.getIdCopia());
-			System.out.println("FILME: " + filme.listaFilme(copia.getIdFilme()));
-			System.out.println("FORMATO: " + formato.listaFormato(copia.getIdFormato()));
-			//System.out.println("LOCADO" + copia.getCopiaLocada());
+			System.out
+					.println("FILME: " + filme.listaFilme(copia.getIdFilme()));
+			System.out.println("FORMATO: "
+					+ formato.listaFormato(copia.getIdFormato()));
+			// System.out.println("LOCADO" + copia.getCopiaLocada());
 			System.out.println("Valor " + copia.getValorCopia());
 		}
 	}

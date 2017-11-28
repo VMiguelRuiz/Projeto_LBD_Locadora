@@ -8,18 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.connectionFactory.ConnectionFactory;
-import br.com.modelo.Locacao;
+import br.com.modelo.ItemLocacao;
 
-public class LocacaoDao {
-	public void adicionaLocacao(Locacao locacao) {
+public class ItemLocacaoDAO {
+	public void adicionaItem(ItemLocacao item) {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareCall("{call INSERIRLOCACAO(?,?,?,?)}");
-			stmt.setInt(1, locacao.getIdCliente());
-			stmt.setDouble(2, locacao.getValorLocacao());
-			stmt.setInt(3, locacao.getIdLocacao());
-			stmt.setDate(4, locacao.getDataLocacao());
+
+			stmt = connect.prepareCall("{call INSERIRITEM(?,?,?)}");
+			stmt.setInt(1, item.getIdItem());
+			stmt.setInt(2, item.getIdCopia());
+			stmt.setInt(3, item.getIdLocacao());
 
 			stmt.execute();
 			System.out.println("Adicionado");
@@ -30,17 +30,17 @@ public class LocacaoDao {
 		}
 	}
 
-	public void excluiLocacao(Locacao locacao) {
+	public void excluiItem(ItemLocacao item) {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareCall("{call EXCLUILOCACAO(?)}");
-			stmt.setInt(1, locacao.getIdCliente());
-			stmt.setDouble(2, locacao.getValorLocacao());
-			stmt.setInt(3, locacao.getIdLocacao());
-			stmt.setDate(4, locacao.getDataLocacao());
+			stmt = connect.prepareCall("{call EXCLUIITEM(?)}");
+			stmt.setInt(1, item.getIdItem());
+			stmt.setInt(2, item.getIdCopia());
+			stmt.setInt(3, item.getIdLocacao());
 
 			stmt.execute();
+
 			System.out.println("Excluido");
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
@@ -49,15 +49,14 @@ public class LocacaoDao {
 		}
 	}
 
-	public void alteraLocacao(Locacao locacao) {
+	public void alteraItem(ItemLocacao item) {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareCall("{call ALTERARLOCACAO(?,?,?,?)}");
-			stmt.setInt(1, locacao.getIdCliente());
-			stmt.setDouble(2, locacao.getValorLocacao());
-			stmt.setInt(3, locacao.getIdLocacao());
-			stmt.setDate(4, locacao.getDataLocacao());
+			stmt = connect.prepareCall("{call ALTERARITEM(?,?,?)}");
+			stmt.setInt(1, item.getIdItem());
+			stmt.setInt(2, item.getIdCopia());
+			stmt.setInt(3, item.getIdLocacao());
 
 			stmt.execute();
 			System.out.println("Alterado");
@@ -68,25 +67,24 @@ public class LocacaoDao {
 		}
 	}
 
-	public List<Locacao> listaLocacao() {
+	public List<ItemLocacao> listaItem() {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareStatement("select * from TB_LOCACAO");
-			List<Locacao> L = new ArrayList<Locacao>();
+			stmt = connect.prepareStatement("select * from TB_ITEMLOCACAO");
+			List<ItemLocacao> itens = new ArrayList<ItemLocacao>();
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				Locacao locacao = new Locacao();
-				locacao.setIdLocacao(rs.getInt("LOCACAO_ID"));
-				locacao.setDataLocacao(rs.getDate("LOCACAO_DATA"));
-				locacao.setValorLocacao(rs.getDouble("LOCACAO_VALOR"));
-				locacao.setIdCliente(rs.getInt("CLIENTE_ID"));
+				ItemLocacao item = new ItemLocacao();
+				item.setIdItem(rs.getInt("ITEM_ID"));
+				item.setIdCopia(rs.getInt("COPIA_ID"));
+				item.setIdLocacao(rs.getInt("LOCACAO_ID"));
 
-				L.add(locacao);
+				itens.add(item);
 			}
 			stmt.execute();
 			rs.close();
-			return L;
+			return itens;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {

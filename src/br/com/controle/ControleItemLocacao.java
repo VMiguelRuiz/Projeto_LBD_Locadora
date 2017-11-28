@@ -2,43 +2,52 @@ package br.com.controle;
 
 import java.util.List;
 
-import br.com.DAO.ItemLocacaoDao;
+import br.com.DAO.ItemLocacaoDAO;
 import br.com.modelo.ItemLocacao;
 
 public class ControleItemLocacao {
 
-	public void adicionaItemLocacao(int item_id, int copia_id, int locacao_id) {
-		ItemLocacaoDao dao = new ItemLocacaoDao();
-		ItemLocacao itemLocacao = new ItemLocacao();
-		itemLocacao.setIdItem(item_id);
-		itemLocacao.setIdCopia(copia_id);
-		itemLocacao.setIdLocacao(locacao_id);
-		dao.adicionaItem(itemLocacao);
+	public void adicionaItemLocacao(String itemID, String copiaID, String locacaoID) {
+		int item_id = Integer.parseInt(itemID);
+		int copia_id = Integer.parseInt(copiaID);
+		int locacao_id = Integer.parseInt(locacaoID);
+		
+		ItemLocacaoDAO item_dao = new ItemLocacaoDAO();
+		ItemLocacao item = new ItemLocacao();
+		item.setIdItem(item_id);
+		item.setIdCopia(copia_id);
+		item.setIdLocacao(locacao_id);
+		item_dao.adicionaItem(item);
 	}
 
-	public void excluiItemLocacao(int item_id) {
-		ItemLocacaoDao dao = new ItemLocacaoDao();
-		ItemLocacao itemLocacao = new ItemLocacao();
-		itemLocacao.setIdItem(item_id);
-		dao.excluiItem(itemLocacao);
+	public void excluiItemLocacao(String item_id) {
+		ItemLocacaoDAO item_dao = new ItemLocacaoDAO();
+		ItemLocacao item = new ItemLocacao();
+		item.setIdItem(Integer.parseInt(item_id));
+		item_dao.excluiItem(item);
 	}
 
-	public void alteraItemLocacao(int item_id, int copia_id, int locacao_id) {
-		ItemLocacaoDao dao = new ItemLocacaoDao();
-		ItemLocacao itemLocacao = new ItemLocacao();
-		itemLocacao.setIdItem(item_id);
-		itemLocacao.setIdCopia(copia_id);
-		itemLocacao.setIdLocacao(locacao_id);
-		dao.alteraItem(itemLocacao);
+	public void alteraItemLocacao(String itemID, String copiaID, String locacaoID) {
+		
+		int item_id = Integer.parseInt(itemID);
+		int copia_id = Integer.parseInt(copiaID);
+		int locacao_id = Integer.parseInt(locacaoID);
+		
+		ItemLocacaoDAO item_dao = new ItemLocacaoDAO();
+		ItemLocacao item = new ItemLocacao();
+		item.setIdItem(item_id);
+		item.setIdCopia(copia_id);
+		item.setIdLocacao(locacao_id);
+		item_dao.alteraItem(item);
 	}
 
 	public void ListaItemLocacao() {
-		ItemLocacaoDao dao = new ItemLocacaoDao();
-		List<ItemLocacao> itens = dao.listaItem();
-		for (ItemLocacao itemLocacao : itens) {
-			System.out.println("IDITEM" + itemLocacao.getIdItem());
-			System.out.println("IDCOPIA" + itemLocacao.getIdCopia());
-			System.out.println("IDLOCACAO" + itemLocacao.getIdLocacao());
+		ItemLocacaoDAO item_dao = new ItemLocacaoDAO();
+		List<ItemLocacao> itens = item_dao.listaItem();
+		for (ItemLocacao item : itens) {
+			System.out.println("IDITEM" + item.getIdItem());
+			System.out.println("IDCOPIA" + item.getIdCopia());
+			System.out.println("IDLOCACAO" + item.getIdLocacao());
 		}
 
 	}

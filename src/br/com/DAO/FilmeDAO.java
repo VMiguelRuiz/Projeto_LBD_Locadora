@@ -10,7 +10,7 @@ import java.util.List;
 import br.com.connectionFactory.ConnectionFactory;
 import br.com.modelo.Filme;
 
-public class FilmeDao {
+public class FilmeDAO {
 	public void adicionaFilme(Filme filme) {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;

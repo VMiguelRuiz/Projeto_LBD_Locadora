@@ -8,19 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.connectionFactory.ConnectionFactory;
-import br.com.modelo.Copia;
+import br.com.modelo.Locacao;
 
-public class CopiaDao {
-	public void adicionaCopia(Copia copia) {
+public class LocacaoDAO {
+	public void adicionaLocacao(Locacao locacao) {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareCall("{call INSERIRCOPIA(?,?,?,?,?)}");
-			stmt.setInt(1, copia.getIdCopia());
-			stmt.setInt(2, copia.getIdFilme());
-			stmt.setString(3, copia.getCopiaLocada());
-			stmt.setInt(4, copia.getIdFormato());
-			stmt.setDouble(5, copia.getValorCopia());
+			stmt = connect.prepareCall("{call INSERIRLOCACAO(?,?,?,?)}");
+			stmt.setInt(1, locacao.getIdCliente());
+			stmt.setDouble(2, locacao.getValorLocacao());
+			stmt.setInt(3, locacao.getIdLocacao());
+			stmt.setDate(4, locacao.getDataLocacao());
+
 			stmt.execute();
 			System.out.println("Adicionado");
 		} catch (SQLException e) {
@@ -30,15 +30,15 @@ public class CopiaDao {
 		}
 	}
 
-	public void excluiCopia(Copia copia) {
+	public void excluiLocacao(Locacao locacao) {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareCall("{call EXCLUICOPIA(?)}");
-			stmt.setInt(1, copia.getIdCopia());
-			stmt.setInt(2, copia.getIdFilme());
-			stmt.setString(3, copia.getCopiaLocada());
-			stmt.setInt(4, copia.getIdFormato());
+			stmt = connect.prepareCall("{call EXCLUILOCACAO(?)}");
+			stmt.setInt(1, locacao.getIdCliente());
+			stmt.setDouble(2, locacao.getValorLocacao());
+			stmt.setInt(3, locacao.getIdLocacao());
+			stmt.setDate(4, locacao.getDataLocacao());
 
 			stmt.execute();
 			System.out.println("Excluido");
@@ -49,16 +49,16 @@ public class CopiaDao {
 		}
 	}
 
-	public void alteraCopia(Copia copia) {
+	public void alteraLocacao(Locacao locacao) {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareCall("{call ALTERARCOPIA(?,?,?,?,?)}");
-			stmt.setInt(1, copia.getIdCopia());
-			stmt.setInt(2, copia.getIdFilme());
-			stmt.setString(3, copia.getCopiaLocada());
-			stmt.setInt(4, copia.getIdFormato());
-			stmt.setDouble(5, copia.getValorCopia());
+			stmt = connect.prepareCall("{call ALTERARLOCACAO(?,?,?,?)}");
+			stmt.setInt(1, locacao.getIdCliente());
+			stmt.setDouble(2, locacao.getValorLocacao());
+			stmt.setInt(3, locacao.getIdLocacao());
+			stmt.setDate(4, locacao.getDataLocacao());
+
 			stmt.execute();
 			System.out.println("Alterado");
 		} catch (SQLException e) {
@@ -68,25 +68,25 @@ public class CopiaDao {
 		}
 	}
 
-	public List<Copia> listaCopia() {
+	public List<Locacao> listaLocacao() {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareStatement("select * from TB_COPIA");
-			List<Copia> copias = new ArrayList<Copia>();
+			stmt = connect.prepareStatement("select * from TB_LOCACAO");
+			List<Locacao> L = new ArrayList<Locacao>();
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				Copia copia = new Copia();
-				copia.setIdCopia(rs.getInt("COPIA_ID"));
-				copia.setIdFilme(rs.getInt("FILME_ID"));
-				copia.setCopiaLocada(rs.getString("COPIA_LOCADA"));
-				copia.setIdFormato(rs.getInt("FORMATO_ID"));
-				copia.setValorCopia(rs.getInt("COPIA_VALOR"));
-				copias.add(copia);
+				Locacao locacao = new Locacao();
+				locacao.setIdLocacao(rs.getInt("LOCACAO_ID"));
+				locacao.setDataLocacao(rs.getDate("LOCACAO_DATA"));
+				locacao.setValorLocacao(rs.getDouble("LOCACAO_VALOR"));
+				locacao.setIdCliente(rs.getInt("CLIENTE_ID"));
+
+				L.add(locacao);
 			}
 			stmt.execute();
 			rs.close();
-			return copias;
+			return L;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {

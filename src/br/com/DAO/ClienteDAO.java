@@ -10,7 +10,7 @@ import java.util.List;
 import br.com.connectionFactory.ConnectionFactory;
 import br.com.modelo.Cliente;
 
-public class ClienteDao {
+public class ClienteDAO {
 	public void adicionarCliente(Cliente cliente) {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;

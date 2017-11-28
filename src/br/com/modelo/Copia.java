@@ -4,7 +4,7 @@ public class Copia {
 	private String copia_nome;
 	private int copia_id;
 	private int filme_id;
-	private String copia_locada;
+	private int copia_locada;
 	private int formato_id;
 	private double copia_valor;
 
@@ -32,11 +32,11 @@ public class Copia {
 		this.filme_id = filme_id;
 	}
 
-	public String getCopiaLocada() {
+	public int getCopiaLocada() {
 		return copia_locada;
 	}
 
-	public void setCopiaLocada(String copia_locada) {
+	public void setCopiaLocada(int copia_locada) {
 		this.copia_locada = copia_locada;
 	}
 

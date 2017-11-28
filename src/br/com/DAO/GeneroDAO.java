@@ -8,19 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.connectionFactory.ConnectionFactory;
-import br.com.modelo.Formato;
+import br.com.modelo.Genero;
 
-public class FormatoDao {
-
-	public void adicionaFormato(Formato formato) {
+public class GeneroDAO {
+	public void adicionaGenero(Genero genero) {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			// stmt = connect.prepareStatement("INSERT INTO TIPO (idtipo, nome)
-			// values (?, ?)");
-			stmt = connect.prepareCall("{call InserirFormato(?,?)}");
-			stmt.setInt(1, formato.getIdFormato());
-			stmt.setString(2, formato.getNomeFormato());
+			stmt = connect.prepareCall("{call INSERIRGENERO(?,?)}");
+			stmt.setInt(1, genero.getIdGenero());
+			stmt.setString(2, genero.getNomeGenero());
 
 			stmt.execute();
 			System.out.println("Adicionado");
@@ -31,14 +28,17 @@ public class FormatoDao {
 		}
 	}
 
-	public void excluiFormato(Formato formato) {
+	public void excluiGenero(Genero genero) {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareCall("{call ExcluirFormato(?)}");
-			stmt.setInt(1, formato.getIdFormato());
+			stmt = connect.prepareCall("{call EXCLUIGENERO(?)}");
+			stmt.setInt(1, genero.getIdGenero());
+			stmt.setString(2, genero.getNomeGenero());
+
 			stmt.execute();
 			System.out.println("Excluido");
+
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
 		} finally {
@@ -46,15 +46,17 @@ public class FormatoDao {
 		}
 	}
 
-	public void alteraFormato(Formato formato) {
+	public void alteraGenero(Genero genero) {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareCall("{call AlterarFormato(?, ?)}");
-			stmt.setInt(1, formato.getIdFormato());
-			stmt.setString(2, formato.getNomeFormato());
+			stmt = connect.prepareCall("{call ALTERARGENERO(?,?)}");
+			stmt.setInt(1, genero.getIdGenero());
+			stmt.setString(2, genero.getNomeGenero());
+
 			stmt.execute();
 			System.out.println("Alterado");
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
@@ -62,23 +64,23 @@ public class FormatoDao {
 		}
 	}
 
-	public List<Formato> listaFormatos() {
+	public List<Genero> listaGenero() {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareStatement("select * from TB_FORMATO");
-			List<Formato> formatos = new ArrayList<Formato>();
+			stmt = connect.prepareStatement("select * from TB_GENERO");
+			List<Genero> generos = new ArrayList<Genero>();
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				Formato formato = new Formato();
-				formato.setIdFormato(rs.getInt("FORMATO_ID"));
-				formato.setNomeFormato(rs.getString("FORMATO_NOME"));
+				Genero genero = new Genero();
+				genero.setIdGenero(rs.getInt("GENERO_ID"));
+				genero.setNomeGenero(rs.getString("GENERO_NOME"));
 
-				formatos.add(formato);
+				generos.add(genero);
 			}
 			stmt.execute();
 			rs.close();
-			return formatos;
+			return generos;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
@@ -86,23 +88,22 @@ public class FormatoDao {
 		}
 	}
 	
-	public List<Formato> listaFormatos(int formato_id) {
+	public List<Genero> listaGenero(int genero_id) {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareStatement("select * from TB_FORMATO where formato_id = " + formato_id + "");
-			List<Formato> formatos = new ArrayList<Formato>();
+			stmt = connect.prepareStatement("select * from TB_GENERO where genero_id = "+ genero_id);
+			List<Genero> generos = new ArrayList<Genero>();
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				Formato formato = new Formato();
-				formato.setIdFormato(rs.getInt("FORMATO_ID"));
-				formato.setNomeFormato(rs.getString("FORMATO_NOME"));
+				Genero genero = new Genero();
+				genero.setNomeGenero(rs.getString("GENERO_NOME"));
 
-				formatos.add(formato);
+				generos.add(genero);
 			}
 			stmt.execute();
 			rs.close();
-			return formatos;
+			return generos;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
