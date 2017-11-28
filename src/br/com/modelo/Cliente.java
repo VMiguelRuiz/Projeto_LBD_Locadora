@@ -4,7 +4,7 @@ public class Cliente {
 	private int cliente_id;
 	private String cliente_nome;
 	private long cliente_cpf;
-	private int cliente_telefone;
+	private String cliente_telefone;
 	private String cliente_endereco;
 
 	public int getIdCliente() {
@@ -31,11 +31,11 @@ public class Cliente {
 		this.cliente_cpf = cliente_cpf;
 	}
 
-	public int getTelefoneCliente() {
+	public String getTelefoneCliente() {
 		return cliente_telefone;
 	}
 
-	public void setTelefoneCliente(int cliente_telefone) {
+	public void setTelefoneCliente(String cliente_telefone) {
 		this.cliente_telefone = cliente_telefone;
 	}
 

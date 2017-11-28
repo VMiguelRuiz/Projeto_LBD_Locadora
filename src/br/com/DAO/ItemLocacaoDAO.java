@@ -16,8 +16,8 @@ public class ItemLocacaoDAO {
 		PreparedStatement stmt = null;
 		try {
 
-			stmt = connect.prepareCall("{call INSERIRITEM(?,?,?)}");
-			stmt.setInt(1, item.getIdItem());
+			stmt = connect.prepareCall("{call INSERIRITEM(?,?)}");
+			//stmt.setInt(1, item.getIdItem());
 			stmt.setInt(2, item.getIdCopia());
 			stmt.setInt(3, item.getIdLocacao());
 
@@ -36,8 +36,6 @@ public class ItemLocacaoDAO {
 		try {
 			stmt = connect.prepareCall("{call EXCLUIITEM(?)}");
 			stmt.setInt(1, item.getIdItem());
-			stmt.setInt(2, item.getIdCopia());
-			stmt.setInt(3, item.getIdLocacao());
 
 			stmt.execute();
 

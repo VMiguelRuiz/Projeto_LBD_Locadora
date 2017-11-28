@@ -8,9 +8,8 @@ import br.com.modelo.Locacao;
 
 public class ControleLocacao {
 
-	public void adicionaLocacao(String locacaoID, String locacaoData, String locacaoValor, String clienteID) {
+	public void adicionaLocacao(String locacaoData, String locacaoValor, String clienteID) {
 
-		int locacao_id = Integer.parseInt(locacaoID);
 		// Date locacao_data = Date.parseDate(locacaoData);
 
 		double locacao_valor = Double.parseDouble(locacaoValor);
@@ -18,7 +17,7 @@ public class ControleLocacao {
 
 		LocacaoDAO locacao_dao = new LocacaoDAO();
 		Locacao locacao = new Locacao();
-		locacao.setIdLocacao(locacao_id);
+		
 		// locacao.setDataLocacao(locacaoData);
 		locacao.setValorLocacao(locacao_valor);
 		locacao.setIdCliente(cliente_id);

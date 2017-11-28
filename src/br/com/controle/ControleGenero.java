@@ -5,14 +5,13 @@ import java.util.List;
 import br.com.DAO.GeneroDAO;
 import br.com.modelo.Genero;
 
-public class ControleGenereo {
+public class ControleGenero {
 
-	public void adicionaGenereo(String generoID, String genero_nome) {
+	public void adicionaGenero(String genero_nome) {
 
-		int genero_id = Integer.parseInt(generoID);
 		GeneroDAO genero_dao = new GeneroDAO();
 		Genero genero = new Genero();
-		genero.setIdGenero(genero_id);
+
 		genero.setNomeGenero(genero_nome);
 		genero_dao.adicionaGenero(genero);
 	}
@@ -43,4 +42,13 @@ public class ControleGenereo {
 		}
 	}
 
+	public String listaGenero(int id){
+		String nome = "";
+		GeneroDAO genero_dao = new GeneroDAO();
+		List<Genero> generos = genero_dao.listaGenero();
+		for (Genero genero : generos) {
+			nome = genero.getNomeGenero();
+		}
+		return nome;
+	}
 }

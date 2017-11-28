@@ -9,20 +9,20 @@ import br.com.modelo.Copia;
 
 public class ControleCopia {
 
-	public void adicionaCopia(String copiaID, String filmeID,
-			String copiaLocada, String formatoID) {
+	public void adicionaCopia(String filmeID, String copiaLocada, String formatoID, String copiaValor) {
 
-		int copia_id = Integer.parseInt(copiaID);
 		int filme_id = Integer.parseInt(filmeID);
-		int formato_id = Integer.parseInt(formatoID);
 		int copia_locada = Integer.parseInt(copiaLocada);
+		int formato_id = Integer.parseInt(formatoID);
+		double copia_valor = Double.parseDouble(copiaValor);
 		
 		Copia copia = new Copia();
 		CopiaDAO copia_dao = new CopiaDAO();
-		copia.setIdFormato(copia_id);
-		copia.setIdFilme(filme_id);
+
 		copia.setCopiaLocada(copia_locada);
+		copia.setIdFilme(filme_id);
 		copia.setIdFormato(formato_id);
+		copia.setValorCopia(copia_valor);
 		copia_dao.adicionaCopia(copia);
 	}
 
@@ -33,20 +33,22 @@ public class ControleCopia {
 		copia_dao.excluiCopia(copia);
 	}
 
-	public void alteraCopia(String copiaID, String filmeID,
-			String copiaLocada, String formatoID) {
+	public void alteraCopia(String copiaID, String filmeID, String copiaLocada, String formatoID, String copiaValor) {
 
 		int copia_id = Integer.parseInt(copiaID);
 		int filme_id = Integer.parseInt(filmeID);
-		int formato_id = Integer.parseInt(formatoID);
 		int copia_locada = Integer.parseInt(copiaLocada);
+		int formato_id = Integer.parseInt(formatoID);
+		double copia_valor = Double.parseDouble(copiaValor);
 		
 		Copia copia = new Copia();
 		CopiaDAO copia_dao = new CopiaDAO();
-		copia.setIdFormato(copia_id);
+
+		copia.setIdCopia(copia_id);
 		copia.setIdFilme(filme_id);
 		copia.setCopiaLocada(copia_locada);
 		copia.setIdFormato(formato_id);
+		copia.setValorCopia(copia_valor);
 		copia_dao.alteraCopia(copia);
 	}
 
@@ -58,10 +60,8 @@ public class ControleCopia {
 		List<Copia> copias = copia_dao.listaCopia();
 		for (Copia copia : copias) {
 			System.out.println("ID: " + copia.getIdCopia());
-			System.out
-					.println("FILME: " + filme.listaFilme(copia.getIdFilme()));
-			System.out.println("FORMATO: "
-					+ formato.listaFormato(copia.getIdFormato()));
+			System.out.println("FILME: " + filme.listaFilme(copia.getIdFilme()));
+			System.out.println("FORMATO: " + formato.listaFormato(copia.getIdFormato()));
 			// System.out.println("LOCADO" + copia.getCopiaLocada());
 			System.out.println("Valor " + copia.getValorCopia());
 		}

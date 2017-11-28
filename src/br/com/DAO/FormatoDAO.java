@@ -16,11 +16,9 @@ public class FormatoDAO {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			// stmt = connect.prepareStatement("INSERT INTO TIPO (idtipo, nome)
-			// values (?, ?)");
-			stmt = connect.prepareCall("{call InserirFormato(?,?)}");
-			stmt.setInt(1, formato.getIdFormato());
-			stmt.setString(2, formato.getNomeFormato());
+			stmt = connect.prepareCall("{call InserirFormato(?)}");
+			//stmt.setInt(1, formato.getIdFormato());
+			stmt.setString(1, formato.getNomeFormato());
 
 			stmt.execute();
 			System.out.println("Adicionado");
@@ -90,12 +88,11 @@ public class FormatoDAO {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareStatement("select * from TB_FORMATO where formato_id = " + formato_id + "");
+			stmt = connect.prepareStatement("select * from TB_FORMATO where formato_id = " + formato_id);
 			List<Formato> formatos = new ArrayList<Formato>();
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				Formato formato = new Formato();
-				formato.setIdFormato(rs.getInt("FORMATO_ID"));
 				formato.setNomeFormato(rs.getString("FORMATO_NOME"));
 
 				formatos.add(formato);

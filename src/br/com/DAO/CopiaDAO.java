@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import br.com.connectionFactory.ConnectionFactory;
 import br.com.modelo.Copia;
 
@@ -15,12 +17,12 @@ public class CopiaDAO {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareCall("{call INSERIRCOPIA(?,?,?,?,?)}");
-			stmt.setInt(1, copia.getIdCopia());
-			stmt.setInt(2, copia.getIdFilme());
-			stmt.setInt(3, copia.getCopiaLocada());
-			stmt.setInt(4, copia.getIdFormato());
-			stmt.setDouble(5, copia.getValorCopia());
+			stmt = connect.prepareCall("{call INSERIRCOPIA(?,?,?,?)}");
+			//stmt.setInt(1, copia.getIdCopia());
+			stmt.setInt(1, copia.getIdFilme());
+			stmt.setInt(2, copia.getCopiaLocada());
+			stmt.setInt(3, copia.getIdFormato());
+			stmt.setDouble(4, copia.getValorCopia());
 			stmt.execute();
 			System.out.println("Adicionado");
 		} catch (SQLException e) {
@@ -36,9 +38,6 @@ public class CopiaDAO {
 		try {
 			stmt = connect.prepareCall("{call EXCLUICOPIA(?)}");
 			stmt.setInt(1, copia.getIdCopia());
-			stmt.setInt(2, copia.getIdFilme());
-			stmt.setInt(3, copia.getCopiaLocada());
-			stmt.setInt(4, copia.getIdFormato());
 
 			stmt.execute();
 			System.out.println("Excluido");

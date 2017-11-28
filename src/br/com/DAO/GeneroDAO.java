@@ -15,9 +15,9 @@ public class GeneroDAO {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareCall("{call INSERIRGENERO(?,?)}");
-			stmt.setInt(1, genero.getIdGenero());
-			stmt.setString(2, genero.getNomeGenero());
+			stmt = connect.prepareCall("{call INSERIRGENERO(?)}");
+			//stmt.setInt(1, genero.getIdGenero());
+			stmt.setString(1, genero.getNomeGenero());
 
 			stmt.execute();
 			System.out.println("Adicionado");
@@ -34,7 +34,6 @@ public class GeneroDAO {
 		try {
 			stmt = connect.prepareCall("{call EXCLUIGENERO(?)}");
 			stmt.setInt(1, genero.getIdGenero());
-			stmt.setString(2, genero.getNomeGenero());
 
 			stmt.execute();
 			System.out.println("Excluido");

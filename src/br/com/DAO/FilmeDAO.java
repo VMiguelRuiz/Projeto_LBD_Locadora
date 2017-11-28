@@ -16,10 +16,10 @@ public class FilmeDAO {
 		PreparedStatement stmt = null;
 		try {
 
-			stmt = connect.prepareCall("{call InserirFilme (?,?,?)}");
-			stmt.setInt(1, filme.getIdFilme());
-			stmt.setString(2, filme.getTituloFilme());
-			stmt.setInt(3, filme.getIdGenero());
+			stmt = connect.prepareCall("{call InserirFilme (?, ?)}");
+			// stmt.setInt(1, filme.getIdFilme());
+			stmt.setString(1, filme.getTituloFilme());
+			stmt.setInt(2, filme.getIdGenero());
 
 			stmt.execute();
 
@@ -37,8 +37,6 @@ public class FilmeDAO {
 		try {
 			stmt = connect.prepareCall("{call ExcluiFilme(?)}");
 			stmt.setInt(1, filme.getIdFilme());
-			stmt.setString(2, filme.getTituloFilme());
-			stmt.setInt(3, filme.getIdGenero());
 
 			stmt.execute();
 			System.out.println("Excluido");

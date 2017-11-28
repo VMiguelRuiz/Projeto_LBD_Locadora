@@ -15,12 +15,13 @@ public class LocacaoDAO {
 		Connection connect = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = connect.prepareCall("{call INSERIRLOCACAO(?,?,?,?)}");
-			stmt.setInt(1, locacao.getIdCliente());
-			stmt.setDouble(2, locacao.getValorLocacao());
-			stmt.setInt(3, locacao.getIdLocacao());
-			stmt.setDate(4, locacao.getDataLocacao());
-
+			stmt = connect.prepareCall("{call INSERIRLOCACAO(?,?,?)}");
+			
+			//stmt.setInt(1, locacao.getIdLocacao());
+			stmt.setDate(2, locacao.getDataLocacao());
+			stmt.setDouble(3, locacao.getValorLocacao());
+			stmt.setInt(4, locacao.getIdCliente());
+			
 			stmt.execute();
 			System.out.println("Adicionado");
 		} catch (SQLException e) {
@@ -35,10 +36,8 @@ public class LocacaoDAO {
 		PreparedStatement stmt = null;
 		try {
 			stmt = connect.prepareCall("{call EXCLUILOCACAO(?)}");
-			stmt.setInt(1, locacao.getIdCliente());
-			stmt.setDouble(2, locacao.getValorLocacao());
-			stmt.setInt(3, locacao.getIdLocacao());
-			stmt.setDate(4, locacao.getDataLocacao());
+
+			stmt.setInt(1, locacao.getIdLocacao());
 
 			stmt.execute();
 			System.out.println("Excluido");
@@ -54,10 +53,10 @@ public class LocacaoDAO {
 		PreparedStatement stmt = null;
 		try {
 			stmt = connect.prepareCall("{call ALTERARLOCACAO(?,?,?,?)}");
-			stmt.setInt(1, locacao.getIdCliente());
-			stmt.setDouble(2, locacao.getValorLocacao());
-			stmt.setInt(3, locacao.getIdLocacao());
-			stmt.setDate(4, locacao.getDataLocacao());
+			stmt.setInt(1, locacao.getIdLocacao());
+			stmt.setDate(2, locacao.getDataLocacao());
+			stmt.setDouble(3, locacao.getValorLocacao());
+			stmt.setInt(4, locacao.getIdCliente());
 
 			stmt.execute();
 			System.out.println("Alterado");
@@ -73,7 +72,7 @@ public class LocacaoDAO {
 		PreparedStatement stmt = null;
 		try {
 			stmt = connect.prepareStatement("select * from TB_LOCACAO");
-			List<Locacao> L = new ArrayList<Locacao>();
+			List<Locacao> locacoes = new ArrayList<Locacao>();
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				Locacao locacao = new Locacao();
@@ -82,11 +81,11 @@ public class LocacaoDAO {
 				locacao.setValorLocacao(rs.getDouble("LOCACAO_VALOR"));
 				locacao.setIdCliente(rs.getInt("CLIENTE_ID"));
 
-				L.add(locacao);
+				locacoes.add(locacao);
 			}
 			stmt.execute();
 			rs.close();
-			return L;
+			return locacoes;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {

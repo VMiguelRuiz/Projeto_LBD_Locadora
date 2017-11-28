@@ -7,14 +7,14 @@ import br.com.modelo.ItemLocacao;
 
 public class ControleItemLocacao {
 
-	public void adicionaItemLocacao(String itemID, String copiaID, String locacaoID) {
-		int item_id = Integer.parseInt(itemID);
+	public void adicionaItemLocacao(String copiaID, String locacaoID) {
+
 		int copia_id = Integer.parseInt(copiaID);
 		int locacao_id = Integer.parseInt(locacaoID);
 		
 		ItemLocacaoDAO item_dao = new ItemLocacaoDAO();
 		ItemLocacao item = new ItemLocacao();
-		item.setIdItem(item_id);
+
 		item.setIdCopia(copia_id);
 		item.setIdLocacao(locacao_id);
 		item_dao.adicionaItem(item);
